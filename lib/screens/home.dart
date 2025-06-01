@@ -1,21 +1,87 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/modes/category.dart';
+import 'package:flutter_svg/svg.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final List<Category> categories = Category.getCategories();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(children: [header(), SizedBox(height: 30), category()]),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [header(), SizedBox(height: 20), category()],
+      ),
     );
   }
 
-  Column category() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text("Categories")],
+  Container category() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Categories",
+            style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 60,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    for (var category in categories) {
+                      category.isSelected = false;
+                    }
+                    categories[index].isSelected = true;
+                    setState(() {});
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: categories[index].isSelected
+                          ? const Color(0xff51A8FF)
+                          : Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: categories[index].isSelected
+                              ? const Color(0xff51A8FF).withValues(alpha: .45)
+                              : const Color(0xff050618).withValues(alpha: .05),
+                          offset: const Offset(0, 4),
+                          blurRadius: 25,
+                        ),
+                      ],
+                    ),
+                    child: SvgPicture.asset(
+                      categories[index].vector,
+                      width: 24,
+                      height: 24,
+                      fit: BoxFit.contain,
+                      semanticsLabel: categories[index].name,
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(width: 20),
+              itemCount: categories.length,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -39,11 +105,16 @@ class Home extends StatelessWidget {
               Container(
                 width: 50,
                 height: 50,
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(Icons.notifications, color: Colors.white),
+                child: SvgPicture.asset(
+                  "assets/icons/bell.svg",
+                  fit: BoxFit.contain,
+                  semanticsLabel: "Bell",
+                ),
               ),
             ],
           ),
