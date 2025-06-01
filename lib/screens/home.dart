@@ -33,9 +33,8 @@ class _HomeState extends State<Home> {
             "Categories",
             style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
           ),
-          SizedBox(height: 10),
           SizedBox(
-            height: 60,
+            height: 80,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
@@ -48,21 +47,21 @@ class _HomeState extends State<Home> {
                     setState(() {});
                   },
                   child: Container(
-                    width: 60,
+                    width: 59,
                     height: 60,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: categories[index].isSelected
-                          ? const Color(0xff51A8FF)
+                          ? Colors.blue.shade200
                           : Colors.white,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
                           color: categories[index].isSelected
-                              ? const Color(0xff51A8FF).withValues(alpha: .45)
-                              : const Color(0xff050618).withValues(alpha: .05),
-                          offset: const Offset(0, 4),
-                          blurRadius: 25,
+                              ? Colors.blue.shade200.withValues(alpha: .9)
+                              : Colors.black.withValues(alpha: .1),
+                          offset: const Offset(0, 5),
+                          blurRadius: 10,
                         ),
                       ],
                     ),
