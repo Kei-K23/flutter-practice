@@ -1,6 +1,6 @@
 class Category {
-  String vector;
-  String name;
+  final String vector;
+  final String name;
   bool isSelected;
 
   Category({
