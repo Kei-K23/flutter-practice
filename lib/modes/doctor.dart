@@ -27,7 +27,7 @@ class Doctor {
     doctors.add(
       Doctor(
         name: 'Dr. Jenny Wilson',
-        image: 'assets/images/jenny.png',
+        image: 'assets/images/img1.png',
         imageBox: const Color(0xffFFA340).withValues(alpha: .3),
         specialties: ['Dental Surgeon', 'Aesthetic Surgeon', 'General Dentist'],
         score: 4.8,
@@ -46,15 +46,64 @@ class Doctor {
         ],
       ),
     );
+
     doctors.add(
       Doctor(
         name: 'Dr. Kristin Watson',
-        image: 'assets/images/kristin.png',
+        image: 'assets/images/img2.png',
         imageBox: const Color(0xff3CFFC4).withValues(alpha: .3),
         specialties: ['Dental Surgeon', 'Aesthetic Surgeon', 'General Dentist'],
         score: 4.8,
         bio:
             'Dr. Kristin Watson (Implantologist),  is a Dentist in America, she has 20 years of experience.',
+        calendar: [
+          Calendar(dayNumber: 14, dayName: 'Sun', isSelected: false),
+          Calendar(dayNumber: 15, dayName: 'Mon', isSelected: false),
+          Calendar(dayNumber: 16, dayName: 'Tue', isSelected: true),
+          Calendar(dayNumber: 17, dayName: 'Wed', isSelected: false),
+        ],
+        time: [
+          Time(time: '09:00 AM', isSelected: true),
+          Time(time: '11:00 AM', isSelected: false),
+          Time(time: '03:00 PM', isSelected: false),
+        ],
+      ),
+    );
+    doctors.add(
+      Doctor(
+        name: 'Dr. Alice',
+        image: 'assets/images/img1.png',
+        imageBox: const Color(0xffFFA340).withValues(alpha: .3),
+        specialties: [
+          'Aesthetic Surgeon'
+              'General Dentist',
+        ],
+        score: 4.8,
+        bio:
+            'Dr. Alice (Implantologist),  is a Dentist in America, she has 20 years of experience.',
+        calendar: [
+          Calendar(dayNumber: 14, dayName: 'Sun', isSelected: false),
+          Calendar(dayNumber: 15, dayName: 'Mon', isSelected: false),
+          Calendar(dayNumber: 16, dayName: 'Tue', isSelected: true),
+          Calendar(dayNumber: 17, dayName: 'Wed', isSelected: false),
+        ],
+        time: [
+          Time(time: '09:00 AM', isSelected: true),
+          Time(time: '11:00 AM', isSelected: false),
+          Time(time: '03:00 PM', isSelected: false),
+        ],
+      ),
+    );
+
+    doctors.add(
+      Doctor(
+        name: 'Dr. May',
+        image: 'assets/images/img2.png',
+        imageBox: const Color(0xff3CFFC4).withValues(alpha: .3),
+        specialties: ['Dental Surgeon', 'Aesthetic Surgeon', 'General Dentist'],
+        score: 4.8,
+        bio:
+            'Dr. May (Implantologist),  is a Dentist in America, she has 20 years of experience.',
         calendar: [
           Calendar(dayNumber: 14, dayName: 'Sun', isSelected: false),
           Calendar(dayNumber: 15, dayName: 'Mon', isSelected: false),

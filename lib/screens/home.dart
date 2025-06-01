@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/modes/category.dart';
+import 'package:flutter_application_1/modes/doctor.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Home extends StatefulWidget {
@@ -11,6 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List<Category> categories = Category.getCategories();
+  final List<Doctor> doctors = Doctor.getDoctors();
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,17 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [header(), SizedBox(height: 20), category()],
+        children: [
+          headerSection(),
+          SizedBox(height: 20),
+          categorySection(),
+          Expanded(child: doctorSection()),
+        ],
       ),
     );
   }
 
-  Container category() {
+  Container categorySection() {
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -47,8 +54,8 @@ class _HomeState extends State<Home> {
                     setState(() {});
                   },
                   child: Container(
-                    width: 59,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: categories[index].isSelected
@@ -84,7 +91,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Container header() {
+  Container headerSection() {
     return Container(
       color: Colors.blue.shade200,
       width: double.infinity,
@@ -142,6 +149,75 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget doctorSection() {
+    return ListView.separated(
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            height: 120,
+            width: double.infinity,
+            padding: EdgeInsets.all(10),
+            child: Row(
+              children: [
+                Container(
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: doctors[index].imageBox,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(doctors[index].image),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            doctors[index].name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            doctors[index].specialties.first,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        children: [
+                          Icon(Icons.star, color: Colors.amber),
+                          SizedBox(width: 5),
+                          Text(doctors[index].score.toString()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(height: 1),
+      itemCount: doctors.length,
     );
   }
 }
